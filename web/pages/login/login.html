@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Halaman Login</title>
+    <link rel="stylesheet" href="./static/css/login.css">
+</head>
+
+<body>
+    <div class="login-card">
+        <h2>Login</h2>
+        <form method="POST" id="login-form">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autocomplete="given-name">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <p id="msg" style="color: red;"></p>
+            <button type="submit">Masuk</button>
+        </form>
+    </div>
+</body>
+
+</html>
+
+<script>
+    document
+        .getElementById("login-form")
+        .addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const msg = document.getElementById("msg");
+            try {
+                const res = await fetch("/login", {
+                    method: "POST",
+                    body: new FormData(e.target),
+                })
+
+                const data = await res.json();
+                if (res.ok) {
+                    window.location.href = data.redirect
+                } else {
+                    msg.textContent = data.msg
+                }
+
+            } catch (err) {
+                msg.textContent = "Server Unavailable";
+            }
+        })
+</script>
