@@ -6,11 +6,12 @@ import (
 	"github.com/barbar17/finance-app/internal/auth"
 	"github.com/barbar17/finance-app/internal/db"
 	"github.com/barbar17/finance-app/internal/module/user"
+	"github.com/barbar17/finance-app/internal/utils"
 	"github.com/gin-gonic/gin"
 )
 
 func loginPageHandler(c *gin.Context) {
-	c.HTML(http.StatusOK, "login/login.html", nil)
+	utils.Render(c, "login", gin.H{"Title": "Login"})
 }
 
 func loginPostHandler(sessionStore *auth.SessionStore) gin.HandlerFunc {

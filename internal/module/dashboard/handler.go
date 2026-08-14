@@ -1,13 +1,10 @@
 package dashboard
 
 import (
-	"net/http"
-
+	"github.com/barbar17/finance-app/internal/utils"
 	"github.com/gin-gonic/gin"
 )
 
 func dashboardPageHandler(c *gin.Context) {
-	c.HTML(http.StatusOK, "dashboard/dashboard.html", gin.H{
-		"Title": "Go Finance App",
-	})
+	utils.Render(c, "dashboard", gin.H{"Title": "Go Finance App"})
 }

@@ -4,9 +4,12 @@ import (
 	"log"
 
 	"github.com/barbar17/finance-app/internal/auth"
-	"github.com/barbar17/finance-app/internal/dashboard"
 	"github.com/barbar17/finance-app/internal/db"
-	"github.com/barbar17/finance-app/internal/login"
+	"github.com/barbar17/finance-app/internal/module/dashboard"
+	errorpage "github.com/barbar17/finance-app/internal/module/error_page"
+	"github.com/barbar17/finance-app/internal/module/login"
+	"github.com/barbar17/finance-app/internal/module/transaction"
+	"github.com/barbar17/finance-app/internal/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,22 +26,19 @@ func main() {
 		log.Fatalf("Failed to set trusted proxies: %v", err)
 	}
 
-	// loadWebPages load the html files in the web/pages folder
-	tmpl, err := loadWebPages()
-	if err != nil {
-		log.Fatalf("Failed to load web pages: %v", err)
-	}
-
-	//SetHTMLTemplate set the html pages and Static set the static folder for css and js
-	r.SetHTMLTemplate(tmpl)
+	// LoadTemplates load the html template (layout) in the web/pages folder
+	utils.LoadTemplates()
+	// Static load the static file including css and js
 	r.Static("/static", "./web/static")
 
 	//unguarded routes
+	errorpage.ErrorPageRoutes(r)
 	login.LoginRoutes(r, sessionStore)
 
 	//AuthGuard makes sure the routes below is guarded by authentication
 	r.Use(auth.AuthGuard(sessionStore))
 	dashboard.DashboardRoutes(r)
+	transaction.TransactionRoutes(r)
 
 	r.Run(":8080")
 }

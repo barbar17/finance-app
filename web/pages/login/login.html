@@ -1,10 +1,13 @@
+{{define "layout"}}
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Halaman Login</title>
-    <link rel="stylesheet" href="./static/css/login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/login.css">
+
+    <title>Finance App | {{.Title}}</title>
 </head>
 
 <body>
@@ -26,29 +29,5 @@
 </body>
 
 </html>
-
-<script>
-    document
-        .getElementById("login-form")
-        .addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const msg = document.getElementById("msg");
-            try {
-                const res = await fetch("/login", {
-                    method: "POST",
-                    body: new FormData(e.target),
-                })
-
-                const data = await res.json();
-                if (res.ok) {
-                    window.location.href = data.redirect
-                } else {
-                    msg.textContent = data.msg
-                }
-
-            } catch (err) {
-                msg.textContent = "Server Unavailable";
-            }
-        })
-</script>
+<script src="/static/js/login.js"></script>
+{{end}}
