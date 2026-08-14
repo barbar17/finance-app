@@ -1,0 +1,11 @@
+{{define "navbar"}}
+
+<div class="navbar-menu">
+  <ul>
+    <li><a href="/" class="{{if eq .Title "Dashboard"}}active{{end}}">Dashboard</a></li>
+    <li><a href="/transaction" class="{{if eq .Title "Transaction"}}active{{end}}">Transaction</a></li>
+    <li><a href="/user" class="{{if eq .Title "User"}}active{{end}}">User</a></li>
+  </ul>
+</div>
+
+{{end}}

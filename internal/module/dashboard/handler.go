@@ -6,5 +6,5 @@ import (
 )
 
 func dashboardPageHandler(c *gin.Context) {
-	utils.Render(c, "dashboard", gin.H{"Title": "Go Finance App"})
+	utils.Render(c, "dashboard", gin.H{"Title": "Dashboard"})
 }

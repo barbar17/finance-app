@@ -3,6 +3,7 @@ package utils
 import (
 	"html/template"
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,14 +17,15 @@ var templates PageTamplate
 func LoadTemplates() {
 	templates = make(PageTamplate)
 
-	//tPages list all the pages that used layout.html
-	tPages := []string{"dashboard", "transaction"}
+	//tPages list all the pages that used layout.html template
+	tPages := []string{"dashboard", "transaction", "user"}
 	//uPages list all the pages that has their own template
 	uPages := []string{"login", "404"}
 
 	for _, page := range tPages {
 		t := template.Must(template.ParseFiles(
 			"web/pages/layout.html",
+			"web/pages/components/navbar.html",
 			"web/pages/"+page+"/"+page+".html",
 		))
 		templates[page] = t
@@ -43,6 +45,13 @@ func Render(c *gin.Context, page string, data gin.H) {
 	if !ok {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": "page not found"})
 		return
+	}
+
+	if name, ok := c.Get("name"); ok {
+		nameAsString := name.(string)
+		data["Name"] = strings.ToUpper(nameAsString)
+	} else {
+		data["Name"] = "NAME NOT FOUND"
 	}
 
 	c.Status(http.StatusOK)

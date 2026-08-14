@@ -1,0 +1,119 @@
+:root {
+  --bg: #0f1115;
+  --surface: #171a21;
+  --surface-hover: #20242d;
+  --border: #292e38;
+
+  --text: #f1f3f5;
+  --text-secondary: #a6adb8;
+  --text-muted: #737b88;
+
+  --primary: #34d399;
+  --primary-hover: #10b981;
+
+  --danger: #fb7185;
+  --warning: #fbbf24;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.header {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+
+  padding: 0 24px;
+
+  background: var(--surface);
+  color: var(--text);
+
+  border-bottom: 1px solid var(--border);
+}
+
+.layout {
+  display: flex;
+  min-height: calc(100dvh - 56px);
+}
+
+.navbar {
+  width: 250px;
+  flex-shrink: 0;
+
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+}
+
+.navbar-menu {
+    height: 100%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+}
+
+.navbar-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.navbar-menu li {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-menu a {
+    display: flex;
+    align-items: center;
+
+    min-height: 42px;
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    color: var(--text-secondary);
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-size: 0.95rem;
+    font-weight: 500;
+
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.navbar-menu a:hover {
+    background: var(--surface-hover);
+    color: var(--text);
+}
+
+.navbar-menu a.active {
+    background: var(--primary-muted);
+    color: var(--primary);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+
+  padding: 24px;
+}

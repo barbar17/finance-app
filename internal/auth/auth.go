@@ -9,18 +9,25 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type sessionValue struct {
+	id   int64
+	name string
+}
+
+type sessionData map[string]sessionValue
+
 type SessionStore struct {
-	sessions map[string]int64
+	sessions sessionData
 	mu       sync.RWMutex
 }
 
 func NewSessionStore() *SessionStore {
 	return &SessionStore{
-		sessions: make(map[string]int64),
+		sessions: make(sessionData),
 	}
 }
 
-func (s *SessionStore) Create(userID int64) (string, error) {
+func (s *SessionStore) Create(userID int64, name string) (string, error) {
 	bytes := make([]byte, 32)
 
 	if _, err := rand.Read(bytes); err != nil {
@@ -30,18 +37,21 @@ func (s *SessionStore) Create(userID int64) (string, error) {
 	sessionID := hex.EncodeToString(bytes)
 
 	s.mu.Lock()
-	s.sessions[sessionID] = userID
+	s.sessions[sessionID] = sessionValue{
+		id:   userID,
+		name: name,
+	}
 	s.mu.Unlock()
 
 	return sessionID, nil
 }
 
-func (s *SessionStore) Get(sessionID string) (int64, bool) {
+func (s *SessionStore) Get(sessionID string) (sessionValue, bool) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	userID, ok := s.sessions[sessionID]
-	return userID, ok
+	v, ok := s.sessions[sessionID]
+	return v, ok
 }
 
 func (s *SessionStore) Delete(sessionID string) {
@@ -60,14 +70,15 @@ func AuthGuard(s *SessionStore) gin.HandlerFunc {
 			return
 		}
 
-		userID, ok := s.Get(sessionID)
+		sessionValue, ok := s.Get(sessionID)
 		if !ok {
 			c.Redirect(http.StatusFound, "/login")
 			c.Abort()
 			return
 		}
 
-		c.Set("userID", userID)
+		c.Set("userID", sessionValue.id)
+		c.Set("name", sessionValue.name)
 		c.Next()
 	}
 }

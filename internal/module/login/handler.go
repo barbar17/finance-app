@@ -30,7 +30,7 @@ func loginPostHandler(sessionStore *auth.SessionStore) gin.HandlerFunc {
 			return
 		}
 
-		sessionID, err := sessionStore.Create(u.ID)
+		sessionID, err := sessionStore.Create(u.ID, u.Name)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"success": false,

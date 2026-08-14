@@ -9,6 +9,7 @@ import (
 	errorpage "github.com/barbar17/finance-app/internal/module/error_page"
 	"github.com/barbar17/finance-app/internal/module/login"
 	"github.com/barbar17/finance-app/internal/module/transaction"
+	"github.com/barbar17/finance-app/internal/module/user"
 	"github.com/barbar17/finance-app/internal/utils"
 	"github.com/gin-gonic/gin"
 )
@@ -36,9 +37,10 @@ func main() {
 	login.LoginRoutes(r, sessionStore)
 
 	//AuthGuard makes sure the routes below is guarded by authentication
-	r.Use(auth.AuthGuard(sessionStore))
+	// r.Use(auth.AuthGuard(sessionStore))
 	dashboard.DashboardRoutes(r)
 	transaction.TransactionRoutes(r)
+	user.UserRoutes(r)
 
 	r.Run(":8080")
 }

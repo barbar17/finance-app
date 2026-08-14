@@ -6,10 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finance App | {{.Title}}</title>
+    <link rel="stylesheet" href="static/css/404.css">
 </head>
 
 <body>
-    <h1>Page Not Found 404</h1>
+    <main class="error-page">
+        <p class="error-code">404</p>
+        <h1 class="error-title"> Page not found </h1>
+        <p class="error-message"> The page you're looking for doesn't exist or may have been moved. Let's get you back
+            to your finances. </p>
+        <div class="error-actions">
+            <a href="/" class="button button-primary"> Go to Dashboard </a>
+            <a href="javascript:history.back()" class="button button-secondary"> Go Back </a>
+        </div>
+    </main>
 </body>
 
 </html>

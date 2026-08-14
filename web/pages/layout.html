@@ -5,21 +5,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="static/css/layout.css" rel="stylesheet">
+
   <title>Finance App | {{.Title}}</title>
 </head>
 
 <body>
-  <header>
-    Finance App Header
+  <header class="header">
+    {{.Name}}. Personal Finance Tracker
   </header>
 
-  <main>
-    {{template "content" . }}
-  </main>
+  <section class="layout">
+    <div class="navbar">
+      {{template "navbar" . }}
+    </div>
 
-  <footer>
-    <p>My Finance App</p>
-  </footer>
+    <main class="content">
+      {{template "content" . }}
+    </main>
+  </section>
 </body>
 
 </html>

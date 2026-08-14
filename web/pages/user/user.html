@@ -1,0 +1,26 @@
+{{define "content"}}
+
+<h1>{{.Title}}</h1>
+
+<div class="users-toolbar">
+  <input id="user-search" type="search" placeholder="Search users...">
+</div>
+
+<table id="user-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th data-sort="username">Username</th>
+      <th data-sort="name">Name</th>
+      <th data-sort="created_at">Created</th>
+    </tr>
+  </thead>
+
+  <tbody></tbody>
+</table>
+
+<div id="user-pagination"></div>
+
+<link rel="stylesheet" href="static/css/user.css">
+<script src="static/js/user.js"></script>
+{{end}}
