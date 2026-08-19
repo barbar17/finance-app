@@ -2,11 +2,11 @@
 
 <h1>{{.Title}}</h1>
 
-<div class="users-toolbar">
-  <input id="user-search" type="search" placeholder="Search users...">
+<div class="table-toolbar">
+  <input id="table-search" type="search" placeholder="Search users...">
 </div>
 
-<table id="user-table">
+<table id="table">
   <thead>
     <tr>
       <th>#</th>
@@ -19,8 +19,9 @@
   <tbody></tbody>
 </table>
 
-<div id="user-pagination"></div>
+<div id="table-pagination"></div>
 
-<link rel="stylesheet" href="static/css/user.css">
+<link rel="stylesheet" href="static/css/table.css">
+<script src="static/js/table.js"></script>
 <script src="static/js/user.js"></script>
 {{end}}

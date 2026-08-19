@@ -1,36 +1,13 @@
-let searchTimeout;
-
-const userSearch = document.getElementById("user-search");
-userSearch.addEventListener("input", (e) => {
-  clearTimeout(searchTimeout);
-
-  searchTimeout = setTimeout(() => {
-    searchUser(e.target.value);
-  }, 300);
-})
-
-const state = {
-  page: 1,
-  limit: 10,
-  search: "",
-  sort: "created_at",
-  order: "desc",
-}
-
 function searchUser(query) {
   state.search = query;
 
   loadUsers();
 }
 
-function formatDate(date) {
-  return new Intl.DateTimeFormat("id-ID", {
-    dateStyle: "medium"
-  }).format(new Date(date))
-}
+tableSearchInit(searchUser);
 
 function renderUsers(users) {
-  const tbody = document.querySelector("#user-table tbody");
+  const tbody = document.querySelector("#table tbody");
   tbody.replaceChildren();
 
   if (users.length === 0) {
@@ -70,7 +47,7 @@ function renderUsers(users) {
 }
 
 function renderPagination(pagination) {
-  const container = document.querySelector("#user-pagination");
+  const container = document.querySelector("#table-pagination");
   container.replaceChildren();
 
   const { page, totalPages } = pagination;

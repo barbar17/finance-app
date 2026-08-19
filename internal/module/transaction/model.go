@@ -7,5 +7,13 @@ type Transaction struct {
 	Name      string
 	Amount    int
 	Desc      string
+	Category  string
 	CreatedAt time.Time
+}
+
+type CreateTransaction struct {
+	Name     string
+	Amount   int
+	Desc     string
+	Category string
 }

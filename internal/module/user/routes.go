@@ -7,6 +7,6 @@ func UserRoutes(r *gin.Engine) {
 
 	api := r.Group("/api")
 	{
-		api.GET("/users", GetUsersTable)
+		api.GET("/users", GetUserTable)
 	}
 }

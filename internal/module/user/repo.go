@@ -18,7 +18,7 @@ func NewRepo(db *sql.DB) *Repo {
 	return &Repo{db: db}
 }
 
-func (r *Repo) GetUsersTable(ctx context.Context, p types.TableParams) ([]User, int, error) {
+func (r *Repo) GetUserTable(ctx context.Context, p types.TableParams) ([]User, int, error) {
 	allowedSort := map[string]string{
 		"username":   "username",
 		"name":       "name",
@@ -47,8 +47,7 @@ func (r *Repo) GetUsersTable(ctx context.Context, p types.TableParams) ([]User, 
 	users := make([]User, 0)
 	for rows.Next() {
 		var user User
-		err = rows.Scan(&user.ID, &user.Username, &user.Name, &user.CreatedAt)
-		if err != nil {
+		if err = rows.Scan(&user.ID, &user.Username, &user.Name, &user.CreatedAt); err != nil {
 			return nil, 0, err
 		}
 
