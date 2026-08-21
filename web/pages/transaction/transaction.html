@@ -9,15 +9,44 @@
   <thead>
     <tr>
       <th>#</th>
-      <th data-sort="name">Name</th>
-      <th data-sort="amount">Amount</th>
-      <th data-sort="desc">Desc</th>
-      <th data-sort="category">Category</th>
-      <th data-sort="created_at">Created</th>
+      <th data-sort="name">
+        <div class="sortable">
+          Name
+          <span></span>
+        </div>
+      </th>
+      <th data-sort="amount">
+        <div class="sortable">
+          Amount
+          <span></span>
+        </div>
+      </th>
+      <th data-sort="desc">
+        <div class="sortable">
+          Desc
+          <span></span>
+        </div>
+      </th>
+      <th data-sort="category">
+        <div class="sortable">
+          Category
+          <span></span>
+        </div>
+      </th>
+      <th data-sort="created_at">
+        <div class="sortable">
+          Created
+          <span><i class="fa-solid fa-arrow-down"></i></span>
+        </div>
+      </th>
     </tr>
   </thead>
 
-  <tbody></tbody>
+  <tbody>
+    <tr>
+      <td colspan="6" style="text-align: center;">Loading...</td>
+    </tr>
+  </tbody>
 </table>
 
 <div id="table-pagination"></div>

@@ -1,25 +1,15 @@
-function searchUser(query) {
+tableSearchInit((query) => {
   state.search = query;
 
   loadUsers();
-}
-
-tableSearchInit(searchUser);
+});
 
 function renderUsers(users) {
   const tbody = document.querySelector("#table tbody");
   tbody.replaceChildren();
 
   if (users.length === 0) {
-    const row = document.createElement("tr");
-    const cell = document.createElement("td");
-
-    cell.colSpan = 4;
-    cell.textContent = "No users found.";
-    cell.style.textAlign = "center";
-
-    row.appendChild(cell);
-    tbody.appendChild(row);
+    handleEmptyTableData(tbody, 4, "User")
 
     return;
   }
@@ -46,51 +36,12 @@ function renderUsers(users) {
   })
 }
 
-function renderPagination(pagination) {
-  const container = document.querySelector("#table-pagination");
-  container.replaceChildren();
-
-  const { page, totalPages } = pagination;
-
-  if (totalPages <= 1) {
-    return;
-  }
-
-  const prev = document.createElement("button");
-  prev.textContent = "Prev";
-  prev.disabled = page === 1;
-  prev.addEventListener("click", () => {
-    state.page = page - 1;
-    loadUsers();
-  });
-
-  container.appendChild(prev);
-
-  for (let i = 1; i <= totalPages; i++) {
-    const button = document.createElement("button");
-    button.textContent = i;
-    button.disabled = i === page;
-    button.addEventListener("click", () => {
-      state.page = i;
-      loadUsers();
-    });
-
-    container.appendChild(button);
-  }
-
-  const next = document.createElement("button");
-  next.textContent = "Next";
-  next.disabled = page === totalPages;
-  next.addEventListener("click", () => {
-    state.page = page + 1;
-    loadUsers();
-  });
-
-  container.appendChild(next);
-}
-
 async function loadUsers() {
   const params = new URLSearchParams(state)
+
+  const tbody = document.querySelector("#table tbody");
+  tbody.replaceChildren();
+  handleLoadingTableData(tbody, 4);
 
   const res = await fetch(`/api/users?${params}`)
   if (!res.ok) {
@@ -100,7 +51,8 @@ async function loadUsers() {
   const data = await res.json();
 
   renderUsers(data.data)
-  renderPagination(data.pagination)
+  renderPagination(data.pagination, loadUsers)
 }
 
-loadUsers()
+tableSortInit(loadUsers);
+loadUsers();

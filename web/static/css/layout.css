@@ -8,11 +8,11 @@
   --text-secondary: #a6adb8;
   --text-muted: #737b88;
 
-  --primary: #34d399;
-  --primary-hover: #10b981;
+  --primary: #059669;
+  --primary-hover: #047857;
 
-  --danger: #fb7185;
-  --warning: #fbbf24;
+  --danger: #be3f55;
+  --warning: #d97706;
 }
 
 * {
@@ -29,7 +29,12 @@ body {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
 .header {
@@ -59,56 +64,56 @@ body {
 }
 
 .navbar-menu {
-    height: 100%;
-    padding: 20px 12px;
-    box-sizing: border-box;
+  height: 100%;
+  padding: 20px 12px;
+  box-sizing: border-box;
 }
 
 .navbar-menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .navbar-menu li {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar-menu a {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    min-height: 42px;
-    padding: 0 12px;
+  min-height: 42px;
+  padding: 0 12px;
 
-    box-sizing: border-box;
+  box-sizing: border-box;
 
-    color: var(--text-secondary);
-    text-decoration: none;
+  color: var(--text-secondary);
+  text-decoration: none;
 
-    border-radius: 8px;
+  border-radius: 8px;
 
-    font-size: 0.95rem;
-    font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 500;
 
-    transition:
-        background-color 0.15s ease,
-        color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .navbar-menu a:hover {
-    background: var(--surface-hover);
-    color: var(--text);
+  background: var(--surface-hover);
+  color: var(--text);
 }
 
 .navbar-menu a.active {
-    background: var(--primary-muted);
-    color: var(--primary);
+  background: var(--primary-muted);
+  color: var(--primary);
 }
 
 .content {

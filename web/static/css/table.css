@@ -115,3 +115,10 @@
   opacity: 0.45;
   cursor: default;
 }
+
+.sortable {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
